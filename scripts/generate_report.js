@@ -145,13 +145,13 @@ async function generateReport() {
   const img6 = fs.readFileSync(path6).toString('base64');
   const img7 = fs.readFileSync(path7).toString('base64');
 
-  console.log('📄 Building PDF HTML Document...');
+  console.log('📄 Building Enhanced PDF HTML Document...');
   const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SOC Analyst Dashboard - Project Report</title>
+  <title>AEGIS SOC Analyst Dashboard - Comprehensive Technical Project Report</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
     
@@ -164,55 +164,58 @@ async function generateReport() {
       font-family: 'Outfit', sans-serif;
       color: #0f172a;
       background: #ffffff;
-      line-height: 1.5;
+      line-height: 1.6;
       font-size: 13px;
       margin: 0;
       padding: 0;
     }
 
     .cover {
-      background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+      background: linear-gradient(135deg, #050811 0%, #0f172a 50%, #1e1b4b 100%);
       color: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
+      padding: 45px;
+      border-radius: 20px;
       margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       page-break-after: always;
       display: flex;
       flex-direction: column;
       justify-content: center;
       min-height: 880px;
       box-sizing: border-box;
+      position: relative;
     }
 
     .cover-title {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 800;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #f43f5e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
+      line-height: 1.2;
     }
 
     .cover-subtitle {
       font-size: 18px;
-      color: #94a3b8;
+      color: #cbd5e1;
       font-weight: 600;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .badge {
       display: inline-block;
-      padding: 6px 14px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 6px 16px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.5);
       color: #38bdf8;
       border-radius: 20px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       font-weight: 700;
       margin-bottom: 20px;
+      letter-spacing: 1px;
     }
 
     .meta-table {
@@ -225,11 +228,15 @@ async function generateReport() {
       color: #cbd5e1;
     }
 
+    .meta-table td {
+      padding: 4px 0;
+    }
+
     .section-header {
       border-bottom: 3px solid #0284c7;
       padding-bottom: 6px;
-      margin-top: 30px;
-      margin-bottom: 16px;
+      margin-top: 35px;
+      margin-bottom: 18px;
       font-size: 20px;
       font-weight: 800;
       color: #0f172a;
@@ -246,24 +253,26 @@ async function generateReport() {
     p {
       color: #334155;
       margin-bottom: 12px;
+      text-align: justify;
     }
 
     .feature-grid {
       display: grid;
       grid-template-cols: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 14px;
+      margin-bottom: 22px;
     }
 
     .feature-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 12px 16px;
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
     .feature-card h4 {
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
       color: #0284c7;
       font-size: 14px;
       font-weight: 700;
@@ -277,18 +286,18 @@ async function generateReport() {
 
     .screenshot-container {
       background: #090d16;
-      padding: 10px;
-      border-radius: 12px;
+      padding: 12px;
+      border-radius: 14px;
       border: 1px solid #334155;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      margin-bottom: 22px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       page-break-inside: avoid;
     }
 
     .screenshot-container img {
       width: 100%;
       height: auto;
-      border-radius: 8px;
+      border-radius: 10px;
       display: block;
     }
 
@@ -297,7 +306,7 @@ async function generateReport() {
       color: #38bdf8;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       padding-left: 4px;
     }
 
@@ -306,7 +315,7 @@ async function generateReport() {
       color: #38bdf8;
       font-family: 'JetBrains Mono', monospace;
       padding: 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 11px;
       overflow-x: auto;
       margin-bottom: 16px;
@@ -319,67 +328,99 @@ async function generateReport() {
     }
 
     .steps-list li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .severity-pill {
       display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 3px 10px;
+      border-radius: 6px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
       font-size: 11px;
     }
-    .sev-low { background: #dcfce7; color: #15803d; }
-    .sev-med { background: #fef3c7; color: #b45309; }
-    .sev-high { background: #ffe4e6; color: #be123c; }
-    .sev-crit { background: #fee2e2; color: #b91c1c; }
+    .sev-low { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .sev-med { background: #fef3c7; color: #b45309; border: 1px solid #fde047; }
+    .sev-high { background: #ffe4e6; color: #be123c; border: 1px solid #f43f5e; }
+    .sev-crit { background: #fee2e2; color: #b91c1c; border: 1px solid #ef4444; }
+
+    .arch-box {
+      background: #f1f5f9;
+      border-left: 4px solid #818cf8;
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .arch-box h4 {
+      margin: 0 0 6px 0;
+      color: #4338ca;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
   <!-- COVER PAGE -->
   <div class="cover">
-    <div class="badge">SECURITY OPERATIONS CONTROL PANEL</div>
+    <div class="badge">SECURITY OPERATIONS CENTER (SOC) CONTROL PANEL</div>
     <h1 class="cover-title">AEGIS SOC Analyst Dashboard</h1>
-    <div class="cover-subtitle">Real-Time Threat Monitoring, Live SIEM Log Stream Analysis, & Grafana Security Visualizer</div>
+    <div class="cover-subtitle">Detailed Project Documentation, Technical Architecture, Real-Time Threat Analysis & User Manual</div>
     
-    <div style="margin-top: 40px; color: #94a3b8; font-size: 14px; line-height: 1.8;">
-      <p style="color: #cbd5e1;"><strong style="color: #38bdf8;">Project Purpose:</strong> Comprehensive Security Operations Center (SOC) control panel enabling cybersecurity teams to monitor real-time network logs, identify attacks using color-coded severity rating, perform incident alert triage, block malicious IPs, and visualize metric analytics.</p>
+    <div style="margin-top: 30px; color: #cbd5e1; font-size: 13px; line-height: 1.8;">
+      <p style="color: #cbd5e1;"><strong style="color: #38bdf8;">Executive Overview:</strong> In modern enterprise computing, Security Operations Centers (SOC) require centralized visual dashboards to process high-velocity telemetry logs, classify threat severity, manage active security incidents, and execute immediate firewall containment. The AEGIS SOC Analyst Dashboard fulfills this role with a user-friendly, vibrant React GUI backed by real-time metric visualizers and Grafana integration.</p>
     </div>
 
     <table class="meta-table">
       <tr>
-        <td><strong>Repository:</strong> github.com/thejaskumarm/soc-analyst-dashboard</td>
+        <td><strong>GitHub Repository:</strong> github.com/thejaskumarm/soc-analyst-dashboard</td>
         <td><strong>Version:</strong> v2.4 Vibrant</td>
       </tr>
       <tr>
-        <td><strong>Technology:</strong> React 18, Recharts, Tailwind CSS, Vite</td>
-        <td><strong>Date:</strong> ${new Date().toISOString().slice(0,10)}</td>
+        <td><strong>Tech Stack:</strong> React 18, Recharts, Tailwind CSS v4, Lucide Icons, Vite</td>
+        <td><strong>Document Date:</strong> ${new Date().toISOString().slice(0,10)}</td>
       </tr>
     </table>
   </div>
 
-  <!-- SECTION 1: WHAT IS THE USE OF THIS TOOL -->
-  <h2 class="section-header">1. Purpose & Core Operational Value</h2>
-  <p>A <strong>Security Operations Center (SOC)</strong> is the command center responsible for monitoring, detecting, analyzing, and mitigating cybersecurity threats. The <strong>AEGIS SOC Analyst Dashboard</strong> equips security teams with a unified control panel to observe live system logs, analyze threat severity in real-time, and execute automated containment actions.</p>
+  <!-- SECTION 1: DETAILED PROJECT EXPLANATION -->
+  <h2 class="section-header">1. Detailed Project Explanation & Architecture</h2>
+  
+  <h3>1.1 What is a SOC Analyst Dashboard?</h3>
+  <p>A <strong>Security Operations Center (SOC)</strong> is a centralized function within an organization employing people, processes, and technology to continuously monitor and improve an organization's security posture while preventing, detecting, analyzing, and responding to cybersecurity incidents.</p>
 
+  <p>The <strong>AEGIS SOC Analyst Dashboard</strong> serves as the primary operational user interface (GUI) for security analysts. It consolidates security telemetry from web application firewalls (WAF), intrusion detection systems (IDS/IPS), authentication services, and operating system endpoints into a unified, interactive dashboard.</p>
+
+  <div class="arch-box">
+    <h4>💡 Core Problem Solved by This Dashboard</h4>
+    <p>Security teams process millions of daily event logs. Without intelligent visual color-coding and automated SIEM rule correlation, analysts face severe <em>alert fatigue</em> and delayed incident response. AEGIS solves this by filtering raw streams, computing an instant DEFCON threat level rating, highlighting malicious payloads, and offering one-click IP containment.</p>
+  </div>
+
+  <h3>1.2 Core Subsystems & Components</h3>
   <div class="feature-grid">
     <div class="feature-card">
-      <h4>⚡ Real-Time Log Streaming</h4>
-      <p>Streams live event feeds with configurable velocity (1x to 10x speed), auto-scrolling, and multi-field keyword search.</p>
+      <h4>⚡ Real-Time Log Engine (logGenerator.js)</h4>
+      <p>Simulates live high-throughput network telemetry including normal GET/POST requests, SSH brute-force attempts, port scans, SQL injections, DDoS floods, and C2 malware beacons.</p>
     </div>
     <div class="feature-card">
-      <h4>🎨 Color-Coded Threat System</h4>
-      <p>Instant visual threat rating: Green for Low/Normal, Yellow for Medium Risk, and Red for High/Critical Threats.</p>
+      <h4>🚨 Global Threat Level (DEFCON Engine)</h4>
+      <p>Dynamically aggregates event frequency and alert density to transition between DEFCON 5 (Normal Ops) up to DEFCON 1 (Critical Threat) with pulsing alert indicators.</p>
     </div>
     <div class="feature-card">
-      <h4>📊 Grafana Analytics & Export</h4>
-      <p>Dual-series area charts, attack distribution donuts, and direct Grafana JSON Dashboard export capability.</p>
+      <h4>📊 Grafana Visualizer & JSON Exporter</h4>
+      <p>Interactive Recharts throughput graphs and a built-in exporter generating pre-built Grafana Dashboard JSON schemas for Grafana Loki / Prometheus setups.</p>
     </div>
     <div class="feature-card">
       <h4>🛡️ Automated Ingress Firewall</h4>
-      <p>One-click IP blacklisting for high/critical threats to enforce drop packet rules at gateway level.</p>
+      <p>Enables analysts to enforce immediate IP blacklisting rules at the edge gateway, blocking malicious actors with a single click.</p>
+    </div>
+    <div class="feature-card">
+      <h4>🔍 Payload Inspection Drawer</h4>
+      <p>Allows analysts to open any log record to examine raw HTTP payloads, headers, user-agent strings, SIEM rule triggers, and GEO-IP origin locations.</p>
+    </div>
+    <div class="feature-card">
+      <h4>⚡ Threat Vector Simulator</h4>
+      <p>An interactive attack simulator enabling SOC teams to inject synthetic attack vectors (DDoS, SQLi, Malware, Brute Force) on demand to observe live system response.</p>
     </div>
   </div>
 
@@ -459,11 +500,15 @@ async function generateReport() {
   </div>
 
   <!-- SECTION 3: HOW TO USE THIS TOOL -->
-  <h2 class="section-header">3. How to Use & Install This Tool on Your Computer</h2>
-  <p>Follow these step-by-step instructions to install and run the SOC Analyst Dashboard locally on macOS, Linux, or Windows.</p>
+  <h2 class="section-header">3. How to Install & Use This Tool on Your Computer</h2>
+  <p>Follow these step-by-step instructions to install and run the AEGIS SOC Analyst Dashboard locally on macOS, Linux, or Windows.</p>
 
   <h3>Prerequisites</h3>
-  <p>Ensure you have <strong>Node.js (v18 or higher)</strong> and <strong>npm</strong> installed on your machine.</p>
+  <p>Ensure you have <strong>Node.js (v18 or higher)</strong> and <strong>npm</strong> installed on your machine:</p>
+  <ul class="steps-list">
+    <li>Check Node version: <code>node -v</code></li>
+    <li>Check npm version: <code>npm -v</code></li>
+  </ul>
 
   <h3>Step 1: Clone the Repository</h3>
   <div class="code-block">git clone https://github.com/thejaskumarm/soc-analyst-dashboard.git</div>
@@ -478,25 +523,31 @@ async function generateReport() {
   <div class="code-block">npm run dev</div>
 
   <h3>Step 5: Access in Browser</h3>
-  <p>Open your browser and navigate to: <a href="http://localhost:5173/" style="color:#0284c7; font-weight:bold;">http://localhost:5173/</a></p>
+  <p>Open your web browser and navigate to: <a href="http://localhost:5173/" style="color:#0284c7; font-weight:bold;">http://localhost:5173/</a></p>
 
   <h3>Step 6: Build for Production Deployment</h3>
   <div class="code-block">npm run build</div>
-  <p>The compiled production assets will be generated in the <code>dist/</code> directory.</p>
+  <p>The compiled production assets will be generated in the <code>dist/</code> directory, ready to deploy to Vercel, Netlify, or Docker containers.</p>
 
-  <!-- SECTION 4: ARCHITECTURE & CONCLUSION -->
-  <h2 class="section-header">4. Architecture & Technical Summary</h2>
-  <p>The project follows a clean, modular React architecture engineered for high performance and low rendering latency under high log stream throughput:</p>
-  
-  <ul class="steps-list">
-    <li><strong>React 18 + Vite:</strong> Fast modular component architecture with instant HMR.</li>
-    <li><strong>Recharts Engine:</strong> Renders smooth time-series area graphs and dynamic attack vector donut charts.</li>
-    <li><strong>Tailwind CSS v4:</strong> Cyber glassmorphic theme with neon borders and radial ambient glow effects.</li>
-    <li><strong>Grafana JSON Exporter:</strong> Generates ready-to-import dashboard schemas for Loki/Prometheus security monitors.</li>
-  </ul>
+  <!-- SECTION 4: GRAFANA INTEGRATION GUIDE -->
+  <h2 class="section-header">4. Connecting to External Grafana Instances</h2>
+  <p>To connect the dashboard with a live Grafana server (e.g. running Grafana Loki or Prometheus):</p>
 
-  <div style="margin-top: 30px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 15px; font-size: 11px; color: #64748b;">
-    AEGIS SOC Security Operations Center Control Panel • Documentation Report Generated Automatically
+  <ol class="steps-list">
+    <li>Navigate to the <strong>Grafana Visualizer</strong> tab in the dashboard.</li>
+    <li>Click <strong>Export Grafana Dashboard JSON</strong> to download the pre-configured JSON template (<code>soc-analyst-grafana-dashboard.json</code>).</li>
+    <li>Open your Grafana web interface (e.g. <code>http://localhost:3000</code>).</li>
+    <li>Go to <strong>Dashboards -> Import</strong> and upload the exported JSON file.</li>
+    <li>Select your Loki or Elasticsearch datasource and click <strong>Import</strong>.</li>
+    <li>Copy your panel embed URL from Grafana and paste it into the AEGIS dashboard embed viewport!</li>
+  </ol>
+
+  <!-- SECTION 5: CONCLUSION -->
+  <h2 class="section-header">5. Technical Conclusion & Project Summary</h2>
+  <p>The AEGIS SOC Analyst Dashboard successfully combines modern frontend engineering with practical cybersecurity workflows. By offering real-time streaming feeds, color-coded threat triage, attack simulation capabilities, automated firewall control, and Grafana ecosystem integration, it provides an intuitive and responsive control panel for SOC analysts.</p>
+
+  <div style="margin-top: 35px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 15px; font-size: 11px; color: #64748b;">
+    AEGIS SOC Security Operations Center Control Panel • Project Documentation Report Generated Automatically
   </div>
 
 </body>
@@ -507,21 +558,8 @@ async function generateReport() {
   fs.writeFileSync(reportHtmlPath, htmlContent);
   console.log(`📄 Report HTML saved to ${reportHtmlPath}`);
 
-  console.log('🖨️ Printing PDF via Headless Chrome...');
-  await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-
-  const pdfPath = path.join(projectRoot, 'SOC_Analyst_Dashboard_Documentation.pdf');
-  await page.pdf({
-    path: pdfPath,
-    format: 'A4',
-    printBackground: true,
-    margin: { top: '10mm', bottom: '10mm', left: '10mm', right: '10mm' }
-  });
-
-  console.log(`✅ PDF Generated Successfully: ${pdfPath}`);
-
   await browser.close();
-  console.log('🎉 Workflow complete!');
+  console.log('🎉 Screenshots and HTML generation complete!');
 }
 
 generateReport().catch(err => {
