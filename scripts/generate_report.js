@@ -217,9 +217,7 @@ function buildReportHTML(screenshotPaths) {
     .cover h1 {
       font-size: 42px;
       font-weight: 800;
-      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #fb7185);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #38bdf8;
       margin-bottom: 14px;
       line-height: 1.15;
     }
